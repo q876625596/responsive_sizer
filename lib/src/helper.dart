@@ -91,14 +91,11 @@ class SizerDevice {
     var watchSize = screenTypeSizeMap[SizerScreenType.watch] ?? 300;
     var mobileSize = screenTypeSizeMap[SizerScreenType.mobile] ?? 600;
     var tabletSize = screenTypeSizeMap[SizerScreenType.tablet] ?? 950;
-    if ((orientation == Orientation.portrait && width < watchSize)
-        || (orientation == Orientation.landscape && height < watchSize)) {
+    if (orientation == Orientation.portrait && width < watchSize) {
       screenType = SizerScreenType.watch;
-    } else if ((orientation == Orientation.portrait && width < mobileSize)
-        || (orientation == Orientation.landscape && height < mobileSize)) {
+    } else if (orientation == Orientation.portrait && width < mobileSize) {
       screenType = SizerScreenType.mobile;
-    } else if ((orientation == Orientation.portrait && width < tabletSize)
-        || (orientation == Orientation.landscape && height < tabletSize)) {
+    } else if (orientation == Orientation.portrait && width < tabletSize) {
       screenType = SizerScreenType.tablet;
     } else {
       screenType = SizerScreenType.desktop;
