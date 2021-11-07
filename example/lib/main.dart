@@ -26,30 +26,7 @@ class Home extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: [
-          Container(
-            height: Adaptive.h(12.5), // or 12.5.h
-            width: 50.w, // or Adaptive.w(50)
-            color: Colors.black,
-          ),
-          Text(
-            "This text is responsive",
-            style: TextStyle(fontSize: 18.sp), // or Adaptive.sp(12)
-          ),
-          Text(
-            "w=${100.w} h=${100.h}",
-            style: TextStyle(fontSize: 12.sp),
-          ),
-          SizerDevice.orientation == Orientation.portrait
-              ? Text("My Orientation is Portrait")
-              : Text("My Orientation is Landscape"),
-          SizerDevice.screenType == SizerScreenType.tablet
-              ? Text("My Screen's Type is a Tablet")
-              : Text("My Screen's Type is a Phone"),
-        ],
-      ),
+      body: Container(),
     );
   }
 }
