@@ -50,17 +50,13 @@ class SizerDevice {
     screenTypeSizeMap = sizeMap;
   }
 
-  /// Sets the Screen's size and Device's `Orientation`,
-  /// `BoxConstraints`, `Height`, and `Width`
-  static void setScreenSize(BoxConstraints constraints, Orientation currentOrientation) {
-    // Sets boxconstraints and orientation
-    boxConstraints = constraints;
+  /// Sets the Device's `Orientation`,
+  static void setScreenOrientation(Orientation currentOrientation) {
     orientation = currentOrientation;
+  }
 
-    // Sets screen width and height
-    width = boxConstraints.maxWidth;
-    height = boxConstraints.maxHeight;
-
+  /// Sets the Device's type
+  static void setDeviceType() {
     // Sets DeviceType
     if (kIsWeb) {
       deviceType = DeviceType.web;
@@ -86,16 +82,26 @@ class SizerDevice {
           break;
       }
     }
+  }
+
+  /// Sets the Screen's size and Device's `BoxConstraints`, `Height`, and `Width`
+  static void setScreenType(BoxConstraints constraints) {
+    // Sets boxconstraints
+    boxConstraints = constraints;
+
+    // Sets screen width and height
+    width = boxConstraints.maxWidth;
+    height = boxConstraints.maxHeight;
 
     // Sets ScreenType
     var watchSize = screenTypeSizeMap[SizerScreenType.watch] ?? 300;
     var mobileSize = screenTypeSizeMap[SizerScreenType.mobile] ?? 600;
     var tabletSize = screenTypeSizeMap[SizerScreenType.tablet] ?? 950;
-    if (orientation == Orientation.portrait && width < watchSize) {
+    if (width < watchSize) {
       screenType = SizerScreenType.watch;
-    } else if (orientation == Orientation.portrait && width < mobileSize) {
+    } else if (width < mobileSize) {
       screenType = SizerScreenType.mobile;
-    } else if (orientation == Orientation.portrait && width < tabletSize) {
+    } else if (width < tabletSize) {
       screenType = SizerScreenType.tablet;
     } else {
       screenType = SizerScreenType.desktop;
