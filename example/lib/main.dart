@@ -9,7 +9,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ResponsiveSizer(
-      builder: (context) {
+      builder: (context, orientation, screenType) {
         return MaterialApp(
           title: 'Responsive Sizer Example',
           theme: ThemeData(
