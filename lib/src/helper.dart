@@ -29,10 +29,14 @@ class SizerDevice {
   /// Device's Width
   static late double width;
 
+  static const double _defaultWatch = 300;
+  static const double _defaultMobile = 600;
+  static const double _defaultTablet = 1000;
+
   static late Map<SizerScreenType, double> screenTypeSizeMap = {
-    SizerScreenType.watch: 300,
-    SizerScreenType.mobile: 600,
-    SizerScreenType.tablet: 950,
+    SizerScreenType.watch: _defaultWatch,
+    SizerScreenType.mobile: _defaultMobile,
+    SizerScreenType.tablet: _defaultTablet,
   };
 
   /// Device's Aspect Ratio
@@ -86,7 +90,7 @@ class SizerDevice {
 
   /// Sets the Screen's size and Device's `BoxConstraints`, `Height`, and `Width`
   static void setScreenType(BoxConstraints constraints) {
-    // Sets boxconstraints
+    // Sets boxConstraints
     boxConstraints = constraints;
 
     // Sets screen width and height
@@ -94,9 +98,9 @@ class SizerDevice {
     height = boxConstraints.maxHeight;
 
     // Sets ScreenType
-    var watchSize = screenTypeSizeMap[SizerScreenType.watch] ?? 300;
-    var mobileSize = screenTypeSizeMap[SizerScreenType.mobile] ?? 600;
-    var tabletSize = screenTypeSizeMap[SizerScreenType.tablet] ?? 950;
+    var watchSize = screenTypeSizeMap[SizerScreenType.watch] ?? _defaultWatch;
+    var mobileSize = screenTypeSizeMap[SizerScreenType.mobile] ?? _defaultMobile;
+    var tabletSize = screenTypeSizeMap[SizerScreenType.tablet] ?? _defaultTablet;
     if (width < watchSize) {
       screenType = SizerScreenType.watch;
     } else if (width < mobileSize) {
