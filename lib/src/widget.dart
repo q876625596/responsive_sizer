@@ -3,6 +3,7 @@ part of responsive_sizer;
 /// Provides `Context`, `Orientation`, and `ScreenType` parameters to the builder function
 typedef ResponsiveSizerType = Widget Function(
   BuildContext,
+  BoxConstraints,
   Orientation,
   SizerScreenType,
 );
@@ -28,7 +29,7 @@ class ResponsiveSizer extends StatelessWidget {
       SizerDevice.setDeviceType();
       return OrientationBuilder(builder: (context, orientation) {
         SizerDevice.setScreenOrientation(orientation);
-        return builder(context, orientation, SizerDevice.screenType);
+        return builder(context, constraints, orientation, SizerDevice.screenType);
       });
     });
   }

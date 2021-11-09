@@ -11,6 +11,9 @@ enum DeviceType { android, ios, fuchsia, web, windows, mac, linux }
 enum SizerScreenType { watch, mobile, tablet, desktop }
 
 class SizerDevice {
+  /// Device's BoxConstraints
+  static late BoxConstraints boxConstraints;
+
   /// Device's Orientation
   static late Orientation orientation;
 
@@ -19,6 +22,12 @@ class SizerDevice {
 
   /// Type of Screen
   static late SizerScreenType screenType;
+
+  /// Device's Height
+  static late double height;
+
+  /// Device's Width
+  static late double width;
 
   static const double _defaultWatch = 300;
   static const double _defaultMobile = 600;
@@ -29,6 +38,16 @@ class SizerDevice {
     SizerScreenType.mobile: _defaultMobile,
     SizerScreenType.tablet: _defaultTablet,
   };
+
+  /// Device's Aspect Ratio
+  static double get aspectRatio {
+    return WidgetsBinding.instance?.window.physicalSize.aspectRatio ?? 1;
+  }
+
+  /// Devices' Pixel Ratio
+  static double get pixelRatio {
+    return WidgetsBinding.instance?.window.devicePixelRatio ?? 1;
+  }
 
   ///set screenTypeSizeMap
   static void setScreenTypeSize(Map<SizerScreenType, double> sizeMap) {
@@ -69,10 +88,14 @@ class SizerDevice {
     }
   }
 
-  /// Sets the Screen's size and Device's `Height`, and `Width`
+  /// Sets the Screen's size and Device's `BoxConstraints`, `Height`, and `Width`
   static void setScreenType(BoxConstraints constraints) {
+    // Sets boxConstraints
+    boxConstraints = constraints;
+
     // Sets screen width and height
-    var width = constraints.maxWidth;
+    width = boxConstraints.maxWidth;
+    height = boxConstraints.maxHeight;
 
     // Sets ScreenType
     var watchSize = screenTypeSizeMap[SizerScreenType.watch] ?? _defaultWatch;
